@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firestore';
-import {concat, from, Observable} from 'rxjs';
+import {concat, Observable} from 'rxjs';
 import {map, take} from 'rxjs/operators';
 import {DocumentReference, Timestamp} from '@firebase/firestore-types';
 import {DomSanitizer} from '@angular/platform-browser';
@@ -59,10 +59,8 @@ export class AppComponent {
   itemsCollection: AngularFirestoreCollection<IMessage>;
   messages: Observable<IMessage[]>;
   add = (item: IMessage): Promise<DocumentReference> => this.itemsCollection.add(item);
-  remove(product: IMessage): Observable<void> {
-    console.log(product)
-    return from(this.db.doc(`msg/${product.id}`).delete());
-  }
+  remove = (product: IMessage) => this.itemsCollection.doc(product.id).delete();
+
   constructor(public sanitizer: DomSanitizer, db: AngularFirestore) {
     this.sanitizer = sanitizer;
     this.itemsCollection = db.collection<IMessage>('msg');
