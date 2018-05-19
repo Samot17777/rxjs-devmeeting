@@ -28,7 +28,7 @@ export class MsgformComponent {
     this.formSubmitSubject
       .pipe(
         filter((): boolean => this.form.valid),
-        map((): IMessage => ({...this.form.value, timestamp: +new Date()})),
+        map((): IMessage => ({...this.form.value, timestamp: new Date()})),
       )
       .subscribe(this.formSubmit);
   }
