@@ -1,17 +1,14 @@
 <mat-drawer-container class="example-container" autosize>
-  <mat-drawer #drawer class="example-sidenav" mode="side">
-    <p>Auto-resizing sidenav</p>
-
-
+  <mat-drawer #drawer class="example-sidenav" mode="side" #end position="end">
     <ul>
-      <li>First</li>
       <li *ngFor="let message of messages | async | slice: - 5" class="msg-item">
-          <p>{{ message.body }}</p>
+          <img src="{{ message.img }}">
+          <a *ngIf="message.link" href="{{ message.link }}">{{ message.sender }}</a>
       </li>
     </ul>
   </mat-drawer>
 
-  <div class="example-sidenav-content">
+  <div class="example-sidenav-content" #start position="start">
     <button type="button" mat-button (click)="drawer.toggle()">
       Toggle sidenav
     </button>

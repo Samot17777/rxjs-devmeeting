@@ -8,6 +8,18 @@
 }
 
 .example-sidenav-content {
-    margin-right: 10%;
-    margin-top: 10%;
+    /* margin-right: 10%;
+    margin-top: 10%; */
+}
+
+.example-sidenav {
+    width: 70%;
+}
+.example-sidenav li {
+    list-style: none;
+    border-bottom: 1px solid #ccc;
+}
+
+.example-sidenav li img {
+    width: 90%;
 }
