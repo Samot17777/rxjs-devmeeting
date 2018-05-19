@@ -8,6 +8,14 @@
     <label>Mesage</label>
     <input matInput type="text" min="0" [formControlName]="'body'"/>
   </mat-form-field>
+  <mat-form-field>
+    <label>image</label>
+    <input matInput type="text" min="0" [formControlName]="'img'"/>
+  </mat-form-field>
+  <mat-form-field>
+    <label>youtube</label>
+    <input matInput type="text" min="0" [formControlName]="'yt'"/>
+  </mat-form-field>
   <div>
     <button type="reset" mat-button>Reset</button>
     <button type="submit" mat-button [disabled]="form.invalid">{{ submitButtonText }}</button>

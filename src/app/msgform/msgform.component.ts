@@ -23,6 +23,8 @@ export class MsgformComponent {
     this.form = formBuilder.group({
       sender: ['', Validators.required],
       body: ['', Validators.required],
+      img: [''],
+      yt: [''],
     });
 
     this.formSubmitSubject
