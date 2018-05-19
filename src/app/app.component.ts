@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
+import {tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,6 @@ import { Observable } from 'rxjs';
 export class AppComponent {
   items: Observable<any[]>;
   constructor(db: AngularFirestore) {
-    this.items = db.collection('items').valueChanges();
+    this.items = db.collection('msg').valueChanges().pipe(tap(console.log));
   }
 }
