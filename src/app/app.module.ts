@@ -7,13 +7,15 @@ import {AppComponent} from './app.component';
 import {AngularFirestoreModule} from 'angularfire2/firestore';
 import {MsgformComponent} from './msgform/msgform.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatButtonModule, MatInputModule, MatRippleModule, MatFormFieldModule, MatCardModule} from '@angular/material';
+import {MatButtonModule, MatInputModule, MatRippleModule, MatFormFieldModule, MatCardModule, MatSidenavModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MsgformComponent
+    MsgformComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
@@ -25,6 +27,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     MatInputModule,
     MatCardModule,
     MatRippleModule,
+    MatSidenavModule,
     AngularFirestoreModule,
     AngularFireModule.initializeApp(environment.firebase),
   ],
