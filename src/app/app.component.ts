@@ -2,11 +2,15 @@ import {Component} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firestore';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
+import * as firebase from 'firebase';
+import DocumentReference = firebase.firestore.DocumentReference;
 
-interface IMessage {
+export interface IMessage {
   sender: string;
   body: string;
   timestamp: number;
+  img?: string;
+  yt?: string;
 }
 
 export const sort = (a: IMessage, b: IMessage): number => {
@@ -31,12 +35,12 @@ export const sortItems = (items: IMessage[]): IMessage[] => {
 })
 export class AppComponent {
   public db: AngularFirestore;
-  items: Observable<IMessage[]>;
-  check = (item: IMessage) => this.itemsCollection.add(item);
   itemsCollection: AngularFirestoreCollection<IMessage>;
+  messages: Observable<IMessage[]>;
+  check = (item: IMessage): Promise<DocumentReference> => this.itemsCollection.add(item);
 
   constructor(db: AngularFirestore) {
     this.itemsCollection = db.collection<IMessage>('msg');
-    this.items = this.itemsCollection.valueChanges().pipe(map(sortItems));
+    this.messages = this.itemsCollection.valueChanges().pipe(map(sortItems));
   }
 }

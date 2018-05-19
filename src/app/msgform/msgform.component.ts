@@ -1,7 +1,8 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Subject} from 'rxjs';
-import {filter, map, tap} from 'rxjs/operators';
+import {filter, map} from 'rxjs/operators';
+import {IMessage} from '../app.component';
 
 @Component({
   selector: 'app-msgform',
@@ -14,8 +15,8 @@ export class MsgformComponent {
   public submitButtonText = 'send me';
 
 
-  @Output() formSubmit = new EventEmitter();
-  formSubmitSubject = new Subject();
+  @Output() formSubmit: EventEmitter<IMessage> = new EventEmitter();
+  formSubmitSubject: Subject<IMessage> = new Subject();
 
   constructor(private formBuilder: FormBuilder) {
 
@@ -26,8 +27,8 @@ export class MsgformComponent {
 
     this.formSubmitSubject
       .pipe(
-        filter(() => this.form.valid),
-        map(() => ({...this.form.value, timestamp: +new Date()})),
+        filter((): boolean => this.form.valid),
+        map((): IMessage => ({...this.form.value, timestamp: +new Date()})),
       )
       .subscribe(this.formSubmit);
   }

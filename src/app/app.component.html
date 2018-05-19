@@ -1,7 +1,7 @@
 <div>
   <ul>
-    <li *ngFor="let item of items | async">
-      {{ item.sender }}
+    <li *ngFor="let message of messages | async">
+      {{ message.sender }}
     </li>
   </ul>
   <app-msgform (formSubmit)="check($event)"></app-msgform>
