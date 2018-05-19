@@ -1,6 +1,13 @@
 
 .example-container {
     position: fixed;
-    right: 5vw;
-    top: 2vw;
+    right: 0vw;
+    top: 0vw;
+    width: 30vw;
+    height: 100vh;
+}
+
+.example-sidenav-content {
+    margin-right: 10%;
+    margin-top: 10%;
 }

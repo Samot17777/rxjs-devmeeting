@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {MatSidenavModule} from '@angular/material/sidenav';
 
 @Component({
@@ -7,6 +7,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
+
+  @Input() messages;
 
   constructor() { }
 

@@ -1,10 +1,14 @@
 <mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side">
     <p>Auto-resizing sidenav</p>
-    <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
-    <button (click)="showFiller = !showFiller" mat-raised-button>
-      Toggle extra text
-    </button>
+
+
+    <ul>
+      <li>First</li>
+      <li *ngFor="let message of messages | async | slice: - 5" class="msg-item">
+          <p>{{ message.body }}</p>
+      </li>
+    </ul>
   </mat-drawer>
 
   <div class="example-sidenav-content">
