@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {MatSidenavModule} from '@angular/material/sidenav';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { FilermsgPipe } from './../filermsg.pipe';
 
 @Component({
   selector: 'app-sidebar',
@@ -16,3 +17,5 @@ export class SidebarComponent implements OnInit {
   }
 
 }
+
+

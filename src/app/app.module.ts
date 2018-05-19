@@ -10,12 +10,14 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule, MatInputModule, MatRippleModule, MatFormFieldModule, MatCardModule, MatSidenavModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { FilermsgPipe } from './filermsg.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     MsgformComponent,
-    SidebarComponent
+    SidebarComponent,
+    FilermsgPipe
   ],
   imports: [
     BrowserModule,

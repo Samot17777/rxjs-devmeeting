@@ -1,7 +1,7 @@
 <mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side" #end position="end">
     <ul>
-      <li *ngFor="let message of messages | async | slice: - 5" class="msg-item">
+      <li *ngFor="let message of messages | async | filermsg | slice: - 5" class="msg-item">
           <img src="{{ message.img }}">
           <a *ngIf="message.link" href="{{ message.link }}">{{ message.sender }}</a>
       </li>
