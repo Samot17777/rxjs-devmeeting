@@ -9,12 +9,6 @@ interface IMessage {
   timestamp: number;
 }
 
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
-})
-
 export const sort = (a: IMessage, b: IMessage): number => {
   if (a.sender < b.sender) {
     return -1;
@@ -30,6 +24,11 @@ export const sortItems = (items: IMessage[]): IMessage[] => {
   return items;
 };
 
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
 export class AppComponent {
   items: Observable<IMessage[]>;
 
