@@ -8,6 +8,7 @@ import {AngularFirestoreModule} from 'angularfire2/firestore';
 import {MsgformComponent} from './msgform/msgform.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule, MatInputModule, MatRippleModule, MatFormFieldModule} from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import {MatButtonModule, MatInputModule, MatRippleModule, MatFormFieldModule} fr
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     MatButtonModule,

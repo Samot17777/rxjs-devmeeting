@@ -1,5 +1,8 @@
-<ul>
-  <li *ngFor="let item of items | async">
-    {{ item.sender }}
-  </li>
-</ul>
+<div>
+  <ul>
+    <li *ngFor="let item of items | async">
+      {{ item.sender }}
+    </li>
+  </ul>
+  <app-msgform></app-msgform>
+</div>
