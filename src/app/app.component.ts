@@ -4,11 +4,13 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import * as firebase from 'firebase';
 import DocumentReference = firebase.firestore.DocumentReference;
+import { Timestamp } from '@firebase/firestore-types';
 
 export interface IMessage {
   sender: string;
   body: string;
-  timestamp: number;
+  timestamp: Timestamp;
+  date?: Date;
   img?: string;
   yt?: string;
 }
@@ -28,6 +30,13 @@ export const sortItems = (items: IMessage[]): IMessage[] => {
   return items;
 };
 
+export const transform = (items: IMessage[]): IMessage[] => {
+  return items.map((item) => {
+    item.date = new Date(item.timestamp.seconds);
+    return item;
+  });
+};
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -41,6 +50,6 @@ export class AppComponent {
 
   constructor(db: AngularFirestore) {
     this.itemsCollection = db.collection<IMessage>('msg');
-    this.messages = this.itemsCollection.valueChanges().pipe(map(sortItems));
+    this.messages = this.itemsCollection.valueChanges().pipe(map(transform), map(sortItems));
   }
 }
