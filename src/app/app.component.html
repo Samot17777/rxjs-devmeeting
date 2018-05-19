@@ -4,6 +4,7 @@
       <mat-card>
         <mat-card-header>
           <mat-card-title>
+            <span class="remove" (click)="remove(message)">x</span>
             <a *ngIf="message.link" href="{{ message.link }}">{{ message.sender }}</a>
             <h2 *ngIf="!message.link">{{ message.sender }}</h2>
           </mat-card-title>
@@ -21,6 +22,5 @@
       </mat-card>
     </li>
   </ul>
-  <app-msgform (formSubmit)="check($event)"></app-msgform>
-  <app-sidebar [messages]="messages"></app-sidebar>
+  <app-msgform (formSubmit)="add($event)"></app-msgform>
 </div>

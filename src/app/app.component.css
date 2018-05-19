@@ -1,17 +1,28 @@
 .msg-list {
-    width: 350px;
+  width: 350px;
 }
 
 .msg-item {
-    display: block;
-    margin: 1em 0;
+  display: block;
+  margin: 1em 0;
 }
 
 .mat-card-header-text {
-    width: 100%;
+  width: 100%;
 }
 
 .content {
-    width: 100%;
-    display: block;
+  width: 100%;
+  display: block;
+}
+
+.remove {
+  color: red;
+  float: right;
+  font-size: 1.2em;
+  font-weight: 500;
+}
+
+.remove:hover {
+  cursor: pointer;
 }

@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firestore';
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {concat, from, Observable} from 'rxjs';
+import {map, take} from 'rxjs/operators';
 import {DocumentReference, Timestamp} from '@firebase/firestore-types';
 import {DomSanitizer} from '@angular/platform-browser';
 
@@ -9,6 +9,7 @@ export interface IMessage {
   sender: string;
   body: string;
   timestamp: Timestamp;
+  id: string;
   date?: Date;
   link?: Date;
   img?: string;
@@ -57,11 +58,22 @@ export class AppComponent {
   public db: AngularFirestore;
   itemsCollection: AngularFirestoreCollection<IMessage>;
   messages: Observable<IMessage[]>;
-  check = (item: IMessage): Promise<DocumentReference> => this.itemsCollection.add(item);
-
+  add = (item: IMessage): Promise<DocumentReference> => this.itemsCollection.add(item);
+  remove(product: IMessage): Observable<void> {
+    console.log(product)
+    return from(this.db.doc(`msg/${product.id}`).delete());
+  }
   constructor(public sanitizer: DomSanitizer, db: AngularFirestore) {
     this.sanitizer = sanitizer;
     this.itemsCollection = db.collection<IMessage>('msg');
-    this.messages = this.itemsCollection.valueChanges().pipe(map(transform), map(sortItems));
+    this.messages = concat(
+      this.itemsCollection.snapshotChanges().pipe(take(1)),
+      this.itemsCollection.stateChanges()
+    ).pipe(
+      map(a => a.map(a => a.payload.doc)),
+      map(a => a.map(a => ({...a.data(), id: a.id}))),
+      map(transform),
+      map(sortItems),
+    );
   }
 }
