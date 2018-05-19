@@ -4,5 +4,5 @@
       {{ item.sender }}
     </li>
   </ul>
-  <app-msgform></app-msgform>
+  <app-msgform (formSubmit)="check($event)"></app-msgform>
 </div>

@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Subject} from 'rxjs';
-import {filter, map} from 'rxjs/operators';
+import {filter, map, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-msgform',
@@ -27,7 +27,7 @@ export class MsgformComponent {
     this.formSubmitSubject
       .pipe(
         filter(() => this.form.valid),
-        map(() => this.form.value)
+        map(() => ({...this.form.value, timestamp: +new Date()})),
       )
       .subscribe(this.formSubmit);
   }

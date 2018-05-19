@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {AngularFirestore} from 'angularfire2/firestore';
+import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firestore';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
@@ -30,9 +30,13 @@ export const sortItems = (items: IMessage[]): IMessage[] => {
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  public db: AngularFirestore;
   items: Observable<IMessage[]>;
+  check = (item: IMessage) => this.itemsCollection.add(item);
+  itemsCollection: AngularFirestoreCollection<IMessage>;
 
   constructor(db: AngularFirestore) {
-    this.items = db.collection('msg').valueChanges().pipe(map(sortItems));
+    this.itemsCollection = db.collection<IMessage>('msg');
+    this.items = this.itemsCollection.valueChanges().pipe(map(sortItems));
   }
 }
