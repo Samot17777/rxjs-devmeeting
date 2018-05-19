@@ -25,6 +25,7 @@ export class MsgformComponent {
       body: ['', Validators.required],
       img: [''],
       yt: [''],
+      link: [''],
     });
 
     this.formSubmitSubject

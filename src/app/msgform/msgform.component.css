@@ -1,0 +1,12 @@
+
+.container {
+  border-top: 3px solid darkgrey;
+  padding: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.container > * {
+  width: 48%;
+}
