@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
-import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firestore';
-import {concat, Observable} from 'rxjs';
-import {map, take} from 'rxjs/operators';
+import {AngularFirestore, AngularFirestoreCollection, DocumentChangeAction} from 'angularfire2/firestore';
+import {concat, from, Observable} from 'rxjs';
+import {concatMap, map, scan, take, tap} from 'rxjs/operators';
 import {DocumentReference, Timestamp} from '@firebase/firestore-types';
 import {DomSanitizer} from '@angular/platform-browser';
 
@@ -41,13 +41,11 @@ export const sortItems = (items: IMessage[]): IMessage[] => {
   return items;
 };
 
-export const transform = (items: IMessage[]): IMessage[] => {
-  return items.map((item) => {
+export const transform = (item: IMessage) => {
     item.date = new Date(item.timestamp.toDate());
     item.yt = getYTid(item.yt || '');
     return item;
-  });
-};
+  };
 
 @Component({
   selector: 'app-root',
@@ -65,13 +63,14 @@ export class AppComponent {
     this.sanitizer = sanitizer;
     this.itemsCollection = db.collection<IMessage>('msg');
     this.messages = concat(
-      this.itemsCollection.snapshotChanges().pipe(take(1)),
       this.itemsCollection.stateChanges()
     ).pipe(
-      map(a => a.map(a => a.payload.doc)),
-      map(a => a.map(a => ({...a.data(), id: a.id}))),
-      map(transform),
+      map(x => x.map(a => a.payload.doc).map(a => ({...a.data(), id: a.id}))),
+      tap(console.log),
       map(sortItems),
+      concatMap((x) => from(x)),
+      map(transform),
+      scan((x, y) => x.concat([y]), [])
     );
   }
 }
