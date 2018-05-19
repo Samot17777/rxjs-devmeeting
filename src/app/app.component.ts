@@ -9,6 +9,7 @@ export interface IMessage {
   body: string;
   timestamp: Timestamp;
   date?: Date;
+  link?: Date;
   img?: string;
   yt?: string;
 }
