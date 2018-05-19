@@ -1,7 +1,16 @@
 <div>
-  <ul>
-    <li *ngFor="let message of messages | async">
-      {{ message.sender }}
+  <ul class="msg-list">
+    <li *ngFor="let message of messages | async" class="msg-item">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>{{ item.sender }}</mat-card-title>
+          <mat-card-subtitle>{{ item.timestamp }}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="{{ item.img }}">
+        <mat-card-content>
+          <p>{{ item.body }}</p>
+        </mat-card-content>
+      </mat-card>
     </li>
   </ul>
   <app-msgform (formSubmit)="check($event)"></app-msgform>

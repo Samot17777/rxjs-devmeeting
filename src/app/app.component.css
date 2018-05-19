@@ -1,0 +1,17 @@
+.msg-list {
+    width: 350px;
+}
+
+.msg-item {
+    display: block;
+    margin: 1em 0;
+}
+
+.mat-card-header-text {
+    width: 100%;
+}
+
+.content {
+    width: 100%;
+    display: block;
+}
