@@ -25,7 +25,7 @@ export const sort = (a: IMessage, b: IMessage): number => {
   return 0;
 };
 
-export const sortItems = (items: IMessage[]) => {
+export const sortItems = (items: IMessage[]): IMessage[] => {
   items.sort(sort);
   return items;
 };
