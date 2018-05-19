@@ -1,7 +1,13 @@
-import { Component } from '@angular/core';
-import { AngularFirestore } from 'angularfire2/firestore';
-import { Observable } from 'rxjs';
-import {tap} from 'rxjs/operators';
+import {Component} from '@angular/core';
+import {AngularFirestore} from 'angularfire2/firestore';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
+
+interface IMessage {
+  sender: string;
+  body: string;
+  timestamp: number;
+}
 
 @Component({
   selector: 'app-root',
@@ -10,8 +16,20 @@ import {tap} from 'rxjs/operators';
 })
 
 export class AppComponent {
-  items: Observable<any[]>;
+  items: Observable<IMessage[]>;
+
   constructor(db: AngularFirestore) {
-    this.items = db.collection('msg').valueChanges().pipe(tap(console.log));
+    this.items = db.collection('msg').valueChanges().pipe(map((items: IMessage[]) => {
+      items.sort((a, b) => {
+        if (a.sender < b.sender) {
+          return -1;
+        }
+        if (a.sender > b.sender) {
+          return 1;
+        }
+        return 0;
+      });
+      return items;
+    }));
   }
 }
