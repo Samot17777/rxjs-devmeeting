@@ -1,5 +1,5 @@
-<form
-  [formGroup]="form" (ngSubmit)="formSubmitSubject.next()">
+<form class="container"
+      [formGroup]="form" (ngSubmit)="formSubmitSubject.next()">
   <mat-form-field>
     <label>Sender</label>
     <input matInput type="text" [formControlName]="'sender'"/>
@@ -21,7 +21,7 @@
     <input matInput type="text" min="0" [formControlName]="'link'"/>
   </mat-form-field>
   <div>
-    <button type="reset" mat-button>Reset</button>
-    <button type="submit" mat-button [disabled]="form.invalid">{{ submitButtonText }}</button>
+    <button type="reset" color="warn" mat-button>Reset</button>
+    <button type="submit" color="primary" mat-button [disabled]="form.invalid">{{ submitButtonText }}</button>
   </div>
 </form>
