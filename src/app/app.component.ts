@@ -2,9 +2,7 @@ import {Component} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firestore';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import * as firebase from 'firebase';
-import DocumentReference = firebase.firestore.DocumentReference;
-import { Timestamp } from '@firebase/firestore-types';
+import {DocumentReference, Timestamp} from '@firebase/firestore-types';
 
 export interface IMessage {
   sender: string;
@@ -16,10 +14,10 @@ export interface IMessage {
 }
 
 export const sort = (a: IMessage, b: IMessage): number => {
-  if (a.sender < b.sender) {
+  if (a.timestamp > b.timestamp) {
     return -1;
   }
-  if (a.sender > b.sender) {
+  if (a.timestamp < b.timestamp) {
     return 1;
   }
   return 0;
@@ -32,7 +30,7 @@ export const sortItems = (items: IMessage[]): IMessage[] => {
 
 export const transform = (items: IMessage[]): IMessage[] => {
   return items.map((item) => {
-    item.date = new Date(item.timestamp.seconds);
+    item.date = new Date(item.timestamp.toDate());
     return item;
   });
 };
