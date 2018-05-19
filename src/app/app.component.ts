@@ -15,21 +15,25 @@ interface IMessage {
   styleUrls: ['./app.component.css']
 })
 
+export const sort = (a: IMessage, b: IMessage): number => {
+  if (a.sender < b.sender) {
+    return -1;
+  }
+  if (a.sender > b.sender) {
+    return 1;
+  }
+  return 0;
+};
+
+export const sortItems = (items: IMessage[]) => {
+  items.sort(sort);
+  return items;
+};
+
 export class AppComponent {
   items: Observable<IMessage[]>;
 
   constructor(db: AngularFirestore) {
-    this.items = db.collection('msg').valueChanges().pipe(map((items: IMessage[]) => {
-      items.sort((a, b) => {
-        if (a.sender < b.sender) {
-          return -1;
-        }
-        if (a.sender > b.sender) {
-          return 1;
-        }
-        return 0;
-      });
-      return items;
-    }));
+    this.items = db.collection('msg').valueChanges().pipe(map(sortItems));
   }
 }
